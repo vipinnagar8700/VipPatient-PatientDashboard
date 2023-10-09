@@ -90,7 +90,7 @@ const UserList = ({ variant, user, onUserSelect, setModal, activeList, setActive
                         <Header ref={headerRef}>
                             <Container>
                                 <Button >
-                                    Patients
+                                    Doctors
                                 </Button>
 
                             </Container>

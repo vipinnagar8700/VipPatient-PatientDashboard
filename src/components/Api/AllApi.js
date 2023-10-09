@@ -12,7 +12,7 @@ const parsedData = JSON.parse(dataFromLocalStorage);
 // Now, "parsedData" will contain the full object with all the properties that were originally present in the `data` object
 
 const ClinicID = parsedData?.id;
-console.log(ClinicID, "AAAAAAAAAAAAAA")
+console.log(ClinicID, "AAAAAAAAAAAAAA1")
 const ValueID = parsedData?.clinic_id;
 console.log(ValueID, "AAAAAAAAAAAAAA")
 
@@ -175,8 +175,8 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     const orderId = Math.floor(Math.random() * 1000000);
     var formdata = new FormData();
     formdata.append("patient_id", ClinicID);
-    formdata.append("cart_id", "40");
-    formdata.append("company_id", id);
+    formdata.append("cart_id", "18");
+    formdata.append("company_id", "1");
     formdata.append("first_name", name);
     formdata.append("last_name", lname);
     formdata.append("address1", address);
@@ -191,6 +191,9 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     formdata.append("cod", Cod ? "yes" : "no");
     formdata.append("order_id", orderId);
     formdata.append("stock_pickup", StockPickup ? "1" : "0");
+    formdata.append("products", "{id=50}");
+    formdata.append("amount", "200");
+
 
     var requestOptions = {
         method: 'POST',
@@ -416,8 +419,8 @@ export const DeleteCheckoutData = (id) => {
 }
 
 
-export const getDiscountCoupon = (CompanyID) => {
-    let token = Cookies.get("clinic")
+export const getDiscountCoupon = () => {
+    let token = Cookies.get("user")
     console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -429,7 +432,7 @@ export const getDiscountCoupon = (CompanyID) => {
         redirect: 'follow'
     };
 
-    return fetch(`${Url}/api/get_providers_coupons/${CompanyID}`, requestOptions)
+    return fetch(`${Url}/api/get_providers_coupons/${ValueID}`, requestOptions)
         .then((result) => {
             return result.json()
         })
@@ -437,8 +440,8 @@ export const getDiscountCoupon = (CompanyID) => {
 }
 
 
-export const getDeliveryData = (CompanyID) => {
-    let token = Cookies.get("clinic")
+export const getDeliveryData = () => {
+    let token = Cookies.get("user")
     console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -450,7 +453,7 @@ export const getDeliveryData = (CompanyID) => {
         redirect: 'follow'
     };
 
-    return fetch(`${Url}/api/get_delivery_module_2/${CompanyID}`, requestOptions)
+    return fetch(`${Url}/api/get_delivery_module_2/${ValueID}`, requestOptions)
         .then((result) => {
             return result.json()
         })
@@ -470,7 +473,7 @@ export const GetAllPatientData = () => {
         redirect: 'follow'
     };
 
-    return fetch(`${Url}/api/get_patient`, requestOptions)
+    return fetch(`${Url}/api/get_clinic_users/${ValueID}`, requestOptions)
         .then((result) => {
             return result.json()
         })
@@ -612,4 +615,24 @@ export const UpcommingAppointmtnt = () => {
             return result.json();
         })
         .catch((error) => console.log('error', error));
+}
+
+export const getPaymentDetails = () => {
+    let token = Cookies.get("user")
+    console.log(token, "This Is token for all Api's")
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    return fetch(`${Url}/api/payment_information_in_patient/${ClinicID}`, requestOptions)
+        .then((result) => {
+            return result.json()
+        })
+        .catch(error => console.log('error', error));
 }

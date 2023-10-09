@@ -48,14 +48,24 @@ const Login = () => {
 
       // Assuming the API response includes information about successful login
       if (data && data.token) {
-        // Save the token in local storage
-        localStorage.setItem("user", JSON.stringify(data.user));
-        // Optionally, you can also set the token in a state variable if needed
-        // setToken(data.token);
-        Cookies.set("user", data.token, { expires: 7 });
-        alert("Successfully Logged In!");
-        navigate('/PatientDashboard')
-        // setIsLoggedIn(true); // Update the isLoggedIn state in the parent component
+        const userRole = data.user.role; // Assuming the API response includes the user's role
+
+        // Check the user's role and navigate accordingly
+        if (userRole === "patient") {
+          // Save the token in local storage
+          localStorage.setItem("user", JSON.stringify(data.user));
+          // Optionally, you can also set the token in a state variable if needed
+          // setToken(data.token);
+          Cookies.set("user", data.token, { expires: 7 });
+          alert("Successfully Logged In as a Patient!");
+          navigate('/PatientDashboard')
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+          // setIsLoggedIn(true); // Update the isLoggedIn state in the parent component
+        } else {
+          alert("You do not have the required role to log in!");
+        }
       } else {
         alert("Login failed. Please check your credentials.");
       }

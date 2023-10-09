@@ -16,7 +16,8 @@ import '@fonts/icomoon/icomoon.woff'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-        <BrowserRouter basename="/patient/">
+        
+        <BrowserRouter >
             <InterfaceContextAPI>
                 <App />
             </InterfaceContextAPI>

@@ -136,7 +136,7 @@ const PatientReviews = () => {
         id: item?.id || '',
         order_id: item?.order_id || '',
         created_at: item?.created_at || '',
-        company_name: item?.company?.[0]?.company_name || '',
+        company_name: item?.company?.company_name || '',
         total_amount: item?.total_amount || '',
         status: item?.status || '',
         updated_at: item?.updated_at || '',
@@ -167,7 +167,7 @@ const PatientReviews = () => {
                                         {Orderse && Orderse.length} total orders found
                                     </Typography>
                                     <div className="Order Page">
-                                        <DataTableExtensions
+                                        <DataTableExtensions export={false} print={false}
                                             {...tableData}
                                         >
                                             <DataTable

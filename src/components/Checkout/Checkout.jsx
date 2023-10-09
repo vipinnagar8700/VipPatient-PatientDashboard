@@ -201,7 +201,7 @@ const Checkout = () => {
         let SingleProductofSingleProvider = SingleProductProvider(p_id)
         if (SingleProductofSingleProvider) {
             SingleProductofSingleProvider.then((data) => {
-                setSingleProduct(data.results)
+                setSingleProduct(data?.results)
 
             })
         }
@@ -222,21 +222,21 @@ const Checkout = () => {
 
 
     const DiscountApiData = () => {
-        let DiscountData = getDiscountCoupon(CompanyID)
+        let DiscountData = getDiscountCoupon()
         if (DiscountData) {
             DiscountData.then((data) => {
-                console.log(data.result, "Discount Data!")
-                setA(data.result || '')
+                console.log(data?.result, "Discount Data!")
+                setA(data?.result)
             })
         }
     }
 
     const DeliveryApiData = () => {
-        let DeliveryData = getDeliveryData(CompanyID)
+        let DeliveryData = getDeliveryData()
         if (DeliveryData) {
             DeliveryData.then((data) => {
-                console.log(data.result, "DeliveryData Data!")
-                setAB(data || '')
+                console.log(data?.result, "DeliveryData Data!")
+                setAB(data)
             })
         }
     }
@@ -277,17 +277,17 @@ const Checkout = () => {
 
     console.log(singleProduct, "SSSSSSSSSSSSSSSSSSSS")
 
-    const CompanyID = chec.map(item => item?.product?.company_id);
+    const CompanyID = chec?.map(item => item?.product?.company_id);
     console.log(CompanyID, "KKKKKKKKKKKKKKKKKKK")
-    const initialProductIds = chec.map(item => item?.product_id);
+    const initialProductIds = chec?.map(item => item?.product_id);
     console.log(initialProductIds, "KKKKKKKKKKKKKKKKKKK")
-    const TotalAmount = chec.map(item => item?.product?.amount);
+    const TotalAmount = chec?.map(item => item?.product?.amount);
     console.log(TotalAmount, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
     const total = TotalAmount.reduce((acc, currentValue) => acc + parseFloat(currentValue), 0);
     console.log(total, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
 
 
-    const totalAmounts = chec.map(item => {
+    const totalAmounts = chec?.map(item => {
         const product = item.product;
         const quantity = item.quantity;
         const amount = parseFloat(product.amount);
@@ -319,7 +319,7 @@ const Checkout = () => {
 
             result.then((data) => {
                 console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data?.message);
+                alert(data?.messege);
                 setCount(count + 1)
 
             })
@@ -353,7 +353,7 @@ const Checkout = () => {
                         </Box>
                         <Typography sx={{ mt: 1 }}>Public Coupon Codes:</Typography>
                         {
-                            A && A.map((data, index) => {
+                            A && A?.map((data, index) => {
                                 return (
                                     <Typography mt={0.50} sx={{ fontSize: 14 }} key={index}>{data.code}($ {data.discount}.00)-Description:-{data.description}</Typography>
                                 )

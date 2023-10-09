@@ -316,7 +316,7 @@ const MyFiles = () => {
                                         {PatientSData.length} total  Exiting Files found
                                     </Typography>
                                     <div className="Order Page">
-                                        <DataTableExtensions {...tableData}>
+                                        <DataTableExtensions {...tableData} export={false} print={false}>
                                             <DataTable noHeader defaultSortField="id" defaultSortAsc={false} pagination highlightOnHover />
                                         </DataTableExtensions>
                                     </div>

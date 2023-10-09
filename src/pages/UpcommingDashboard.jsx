@@ -113,7 +113,7 @@ const UpcommingDashboard = ({ nav }) => {
                         <CardContent>
                             <Typography sx={{ fontSize: 12 }}>If you are unable to keep your appointment kindly give at least 48 hours notice. All no shows within 48 hours may be subject to a cancellation fee added to your next appointment.</Typography>
                             <div className="Order Page">
-                                <DataTableExtensions
+                                <DataTableExtensions export={false} print={false}
                                     {...tableData}
                                 >
                                     <DataTable

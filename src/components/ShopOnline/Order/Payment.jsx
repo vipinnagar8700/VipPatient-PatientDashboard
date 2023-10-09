@@ -21,16 +21,15 @@ import Badge from '@mui/material/Badge';
 import { Grid, Stack } from '@mui/material';
 // hooks
 import { useState, useEffect } from 'react';
-import { GetAllORderData } from '@components/Api/AllApi';
+import { GetAllORderData, getPaymentDetails } from '@components/Api/AllApi';
 import { Link } from 'react-router-dom';
 import { textAlign } from '@mui/system';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
-import Payment from './Payment';
 
 
 
-const OrderList = () => {
+const Payment = () => {
     const [Orderse, SetOrder] = useState([])
     const [selectedTab, setSelectedTab] = useState('');
     const [openModal, setOpenModal] = useState(false);
@@ -50,7 +49,7 @@ const OrderList = () => {
     useEffect(() => {
 
 
-        const GetOrder = GetAllORderData()
+        const GetOrder = getPaymentDetails()
         if (GetOrder) {
             GetOrder.then((data) => {
                 console.log(data.result, "GGGGGGGGGGGGGGGGGGGG")
@@ -64,12 +63,12 @@ const OrderList = () => {
 
     const columns = [
         {
-            name: 'Order ID',
+            name: 'Payment ID',
             selector: (row) => row.order_id,
             sortable: true,
         },
         {
-            name: 'Order Booking Date',
+            name: 'Payment Date',
             selector: (row) => {
                 const createdAt = new Date(row.created_at);
                 const options = {
@@ -86,7 +85,7 @@ const OrderList = () => {
             sortable: true,
         },
         {
-            name: '	Provider Name',
+            name: '	Payment To',
             selector: (row) => row.company_name,
             sortable: true,
 
@@ -106,53 +105,37 @@ const OrderList = () => {
     ];
 
 
+   
     console.log(Orderse, "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk")
     const data = Orderse && Orderse.map(item => ({
         id: item?.id || '',
         order_id: item?.order_id || '',
         created_at: item?.created_at || '',
-        company_name: item?.company?.company_name || '',
-        total_amount: item?.total_amount || 0,
+        company_name: item?.company?.[0]?.company_name || '',
+        total_amount: item?.amount || '',
         status: item?.status || '',
         updated_at: item?.updated_at || '',
-
     }));
 
-    const totalAmountSum = Orderse.reduce((sum, item) => sum + parseFloat(item?.total_amount || 0), 0);
 
-console.log('Total Amount Sum:', totalAmountSum);
-
-
-   
     const tableData = {
         columns,
         data,
     };
-   
+    
+  
+
     return (
         // <Tab.Container transition={true} activeKey={selectedTab} onSelect={setSelectedTab}>
         //     <Page title="My Order">
         <>
-        <Sidebar/>
-        <Panel/>
-            <Page title="View Order">
-                <div key="balance">
                     <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
                         <CardContent>
                             <Typography sx={{ fontSize: 16, fontWeight: 400 }} color="text.secondary" gutterBottom>
-                                View Order
+                               Payment Information
                             </Typography>
                             <Card sx={{ minWidth: 1145, '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                 <CardContent>
-                                    {/* <Typography sx={{ fontSize: 13, fontWeight: 300 }} color="text.secondary" gutterBottom>
-                                        Created On :
-                                    </Typography>
-                                    <Typography sx={{ fontSize: 13, fontWeight: 300 }} color="text.secondary" gutterBottom>
-                                        Status :
-                                    </Typography>
-                                    <Typography sx={{ fontSize: 13, fontWeight: 300 }} color="text.secondary" gutterBottom>
-                                        Order Contents
-                                    </Typography> */}
                                     <div className="Order Page">
                                         <DataTableExtensions
                                             {...tableData}
@@ -170,21 +153,10 @@ console.log('Total Amount Sum:', totalAmountSum);
                                 </CardContent>
 
                             </Card>
-                            <Grid container m={2}>
-                                <Grid items xs={9}>
-                                   
-                                    <br/>
-                                   <Typography sx={{fontSize:20,fontWeight:'900'}}>Total:	${totalAmountSum}.00</Typography> 
-                                    
-                                </Grid>
-                            </Grid>
-                            <Payment/>
+                          
                         </CardContent>
 
                     </Card>
-                </div>
-
-            </Page>
 
         </>
 
@@ -192,4 +164,4 @@ console.log('Total Amount Sum:', totalAmountSum);
     )
 }
 
-export default OrderList;
+export default Payment;

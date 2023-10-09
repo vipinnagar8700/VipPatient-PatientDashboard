@@ -49,7 +49,7 @@ const User = ({ data, user, onUserSelect, setModal }) => {
 
         <>
 
-            
+
 
 
         </>

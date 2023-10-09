@@ -262,7 +262,7 @@ const ChangePassword = ({ nav }) => {
                                         <CardContent>
 
                                             <div className="Order Page">
-                                                <DataTableExtensions
+                                                <DataTableExtensions export={false} print={false}
                                                     {...tableData}
                                                 >
                                                     <DataTable

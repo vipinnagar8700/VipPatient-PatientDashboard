@@ -313,7 +313,7 @@ const DoctorsReviews = () => {
                                         </Grid> */}
                                     </Grid>
                                     <div className="Order Page">
-                                        <DataTableExtensions
+                                        <DataTableExtensions export={false} print={false}
                                             {...tableData}
                                         >
                                             <DataTable

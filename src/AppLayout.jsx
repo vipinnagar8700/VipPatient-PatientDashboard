@@ -17,6 +17,7 @@ import SingleProductpage from '@components/ShopOnline/SingleProductpage';
 import Login from '@components/login';
 import { useState } from 'react';
 import OrderList from '@components/ShopOnline/Order/OrderList';
+import PatientRouteProtect from 'PatientRouteProtect';
 
 // pages
 const DashboardA = lazy(() => import('@pages/DashboardA'));
@@ -71,39 +72,39 @@ const AppLayout = () => {
                     <Routes>
                         <Route path="/" element={<Navigate to="/Login" />} />
                         <Route path="/Login" element={<Login />} />
-                        <Route path="/dashboard_b" element={<DashboardB />} />
-                        <Route path="/dashboard_c" element={<DashboardC />} />
-                        <Route path="/PatientDashboard" element={<DashboardD />} />
-                        <Route path="/dashboard_e" element={<DashboardE />} />
-                        <Route path="/dashboard_f" element={<DashboardF />} />
-                        <Route path="/dashboard_g" element={<DashboardG />} />
-                        <Route path="/dashboard_h" element={<DashboardH />} />
-                        <Route path="/dashboard_i" element={<DashboardI />} />
-                        <Route path="/dashboard_j" element={<DashboardJ />} />
-                        <Route path="/dashboard_k" element={<DashboardK />} />
-                        <Route path="/doctor_appointments" element={<DoctorAppointments />} />
-                        <Route path="/patient_appointments" element={<PatientAppointments />} />
-                        <Route path="/patients" element={<Patients />} />
-                        <Route path="/tests" element={<Tests />} />
-                        <Route path="/doctors" element={<Doctors />} />
-                        <Route path="/staff" element={<StaffList />} />
-                        <Route path="/doctor_messenger" element={<DoctorMessenger />} />
-                        <Route path="/patient_messenger" element={<PatientMessenger />} />
-                        <Route path="/ShopOnline" element={<DoctorsReviews />} />
-                        <Route path="/MyOrders" element={<PatientReviews />} />
-                        <Route path="/Intakeform" element={<Finances />} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="/404" element={<PageNotFound />} />
+                        <Route path="/dashboard_b" element={<PatientRouteProtect><DashboardB /></PatientRouteProtect>} />
+                        <Route path="/dashboard_c" element={<PatientRouteProtect><DashboardC /></PatientRouteProtect>} />
+                        <Route path="/PatientDashboard" element={<PatientRouteProtect><DashboardD /></PatientRouteProtect>} />
+                        <Route path="/dashboard_e" element={<PatientRouteProtect><DashboardE /></PatientRouteProtect>} />
+                        <Route path="/dashboard_f" element={<PatientRouteProtect><DashboardF /></PatientRouteProtect>} />
+                        <Route path="/dashboard_g" element={<PatientRouteProtect><DashboardG /></PatientRouteProtect>} />
+                        <Route path="/dashboard_h" element={<PatientRouteProtect><DashboardH /></PatientRouteProtect>} />
+                        <Route path="/dashboard_i" element={<PatientRouteProtect><DashboardI /></PatientRouteProtect>} />
+                        <Route path="/dashboard_j" element={<PatientRouteProtect><DashboardJ /></PatientRouteProtect>} />
+                        <Route path="/dashboard_k" element={<PatientRouteProtect><DashboardK /></PatientRouteProtect>} />
+                        <Route path="/doctor_appointments" element={<PatientRouteProtect><DoctorAppointments /></PatientRouteProtect>} />
+                        <Route path="/patient_appointments" element={<PatientRouteProtect><PatientAppointments /></PatientRouteProtect>} />
+                        <Route path="/patients" element={<PatientRouteProtect><Patients /></PatientRouteProtect>} />
+                        <Route path="/tests" element={<PatientRouteProtect><Tests /></PatientRouteProtect>} />
+                        <Route path="/doctors" element={<PatientRouteProtect><Doctors /></PatientRouteProtect>} />
+                        <Route path="/staff" element={<PatientRouteProtect><StaffList /></PatientRouteProtect>} />
+                        <Route path="/doctor_messenger" element={<PatientRouteProtect><DoctorMessenger /></PatientRouteProtect>} />
+                        <Route path="/patient_messenger" element={<PatientRouteProtect><PatientMessenger /></PatientRouteProtect>} />
+                        <Route path="/ShopOnline" element={<PatientRouteProtect><DoctorsReviews /></PatientRouteProtect>} />
+                        <Route path="/MyOrders" element={<PatientRouteProtect><PatientReviews /></PatientRouteProtect>} />
+                        <Route path="/Intakeform" element={<PatientRouteProtect><Finances /></PatientRouteProtect>} />
+                        <Route path="/settings" element={<PatientRouteProtect><Settings /></PatientRouteProtect>} />
+                        <Route path="/404" element={<PatientRouteProtect><PageNotFound /></PatientRouteProtect>} />
                         <Route path="*" element={<Navigate to="/404" replace />} />
 
                         {/* Login Page Routing */}
 
                         {/* Shop Online Routing */}
-                        <Route path="/patients/dashboard/shop/1/products/:p_id" element={<ShopOnline />} />
-                        <Route path="/patients/dashboard/shop/1/products/5/view/:p_id" element={<SingleProductpage />} />
-                        <Route path="/Checkout" element={<Checkout />} />
-                        <Route path="/settings/ChangePassword" element={<ChangePassword />} />
-                        <Route path="/patient_reviews/OrderList/:p_id" element={<OrderList />} />
+                        <Route path="/patients/dashboard/shop/1/products/:p_id" element={<PatientRouteProtect><ShopOnline /></PatientRouteProtect>} />
+                        <Route path="/patients/dashboard/shop/1/products/5/view/:p_id" element={<PatientRouteProtect><SingleProductpage /></PatientRouteProtect>} />
+                        <Route path="/Checkout" element={<PatientRouteProtect><Checkout /></PatientRouteProtect>} />
+                        <Route path="/settings/ChangePassword" element={<PatientRouteProtect><ChangePassword /></PatientRouteProtect>} />
+                        <Route path="/patient_reviews/OrderList/:p_id" element={<PatientRouteProtect><OrderList /></PatientRouteProtect>} />
 
                     </Routes>
                 </Suspense>
