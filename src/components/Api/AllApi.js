@@ -166,7 +166,7 @@ export const SingleProductProvider = (p_id) => {
 }
 
 
-export const OrderByPatient = (id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup) => {
+export const OrderByPatient = (id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup,cart_id) => {
     let token = Cookies.get("user")
     console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
@@ -175,8 +175,8 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     const orderId = Math.floor(Math.random() * 1000000);
     var formdata = new FormData();
     formdata.append("patient_id", ClinicID);
-    formdata.append("cart_id", "18");
-    formdata.append("company_id", "1");
+    formdata.append("cart_id", cart_id);
+    formdata.append("company_id", ValueID);
     formdata.append("first_name", name);
     formdata.append("last_name", lname);
     formdata.append("address1", address);
@@ -191,8 +191,8 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     formdata.append("cod", Cod ? "yes" : "no");
     formdata.append("order_id", orderId);
     formdata.append("stock_pickup", StockPickup ? "1" : "0");
-    formdata.append("products", "{id=50}");
-    formdata.append("amount", "200");
+    formdata.append("products", "50,51");
+    
 
 
     var requestOptions = {

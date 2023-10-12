@@ -55,6 +55,7 @@ const Form = ({ type }) => {
                     },
                 });
                 setCount(count + 1)
+                window.location.reload()
 
             })
             console.log(result, "Data Updated Successfully");
@@ -286,7 +287,7 @@ const Form = ({ type }) => {
 
 
                     </Grid>
-                    <Grid item sx={6}>
+                    <Grid item xs={6}  sx={{marginTop:3}}  >
                         <button style={{ width: '150px', backgroundColor: '#2BAA27', height: '40px', borderRadius: 4, color: 'white', fontWeight: 600 }} onClick={handleUpdate} type="submit" bgcolor="success" variant="contained">Save Changes</button>
                     </Grid>
                 </Grid>
