@@ -83,8 +83,8 @@ const AppointmentRequest = ({ nav }) => {
             name: 'Status',
             selector: (row) => `Appointment Created ( ${row.status})`,
             sortable: true,
-            minWidth: '70px',
-            maxWidth: '35%',
+            // minWidth: '70px',
+            // maxWidth: '35%',
         },
     ];
 
@@ -116,7 +116,7 @@ const AppointmentRequest = ({ nav }) => {
                 }
                 <WidgetBody style={{ paddingBottom: 26 }}>
 
-                    <Card sx={{ minWidth: 732, '@media screen and (max-width: 2500px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
+                    <Card sx={{ minWidth: 732, backgroundColor: '#F1F5F8' }}>
                         <CardContent>
 
                             <div className="Order Page">

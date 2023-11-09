@@ -29,6 +29,10 @@ import TextField from '@mui/material/TextField';
 import Badge from '@mui/material/Badge';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import Url from 'url/Allurl';
+
+
+
 
 const Checkout = () => {
 
@@ -96,7 +100,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
                             vertical: 'top',
                             horizontal: 'right',
                         },
-                    });;
+                    });
                 });
         }
 
@@ -114,7 +118,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
                         color: 'white',
                         fontWeight: 600
                     }}
-                    src={`https://medical.studiomyraa.com/public/uploads/images/${row.img}`} // Corrected the placement of the src attributef the src attribute
+                    src={`${Url}/public/uploads/images/${row.img}`} // Corrected the placement of the src attributef the src attribute
                     alt="Image" // You should also include an alt attribute for accessibility
                     sx={{ fontWeight: 300 }}
                 />
@@ -465,7 +469,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
 
                 </Card>
             </Box>
-            <Box mt={2}>
+            <Box mt={2} mb={5}>
                 <Grid container >
                     <Grid items xs={12} md={6} p={1}>
                         <Card sx={{ backgroundColor: '#fff' }}>

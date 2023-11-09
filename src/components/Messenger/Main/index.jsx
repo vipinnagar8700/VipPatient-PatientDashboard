@@ -10,6 +10,7 @@ import GroupSeparator from '@ui/GroupSeparator';
 import Tab from 'react-bootstrap/Tab';
 import ScrollContainer from '@components/ScrollContainer';
 import './style.css'
+
 // utils
 import moment from 'moment';
 
@@ -23,6 +24,7 @@ import typing from '@assets/typing.json';
 import VidocallMain from '../Header/App';
 import { MessageContainer } from '../Message/style';
 import Cookies from 'js-cookie';
+import Url from 'url/Allurl';
 
 
 const Main = ({ user }) => {
@@ -39,6 +41,8 @@ const Main = ({ user }) => {
     console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
     const ValueID = parsedData?.id;
+    const Username = parsedData?.name;
+    console.log(Username, "IIIiiiiiiiiiiiiiiiiiiiiiiiii")
     const ClinicID = parsedData?.clinic_id;
     console.log(ValueID, "This IS Clinic Single ID")
     const doctor = useSelector(state => state['messenger']['doctor']);
@@ -51,12 +55,22 @@ const Main = ({ user }) => {
     const height = useContentHeight(headerRef, footerRef);
 
     const [chatMessages, setChatMessages] = useState([]);
-
     useEffect(() => {
-        // Fetch chat messages from the API
-        getAllChat()
-    }, []);
+        const delay = 1000; // 15 seconds in milliseconds
 
+        const fetchChat = () => {
+            getAllChat();
+            setTimeout(fetchChat, delay);
+        };
+
+        // Initial call when the component mounts
+        fetchChat();
+
+        // Clear the timeout when the component unmounts
+        return () => {
+            clearTimeout(fetchChat);
+        };
+    }, []);
 
     const getAllChat = () => {
         let token = Cookies.get("user")
@@ -82,7 +96,7 @@ const Main = ({ user }) => {
             redirect: 'follow'
         };
 
-        fetch("https://medical.studiomyraa.com/api/getChats", requestOptions)
+        fetch(`${Url}/api/getChats`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
@@ -108,7 +122,7 @@ const Main = ({ user }) => {
                     {chatMessages && chatMessages?.map(message => (
                         <MessageContainer
                             key={message.messageId}
-                            className={message.sendBy.name === "Patient" ? "sender" : "receiver"}
+                            className={message.sendBy.name === Username ? "sender" : "receiver"}
                         >
                             <span className="metadata">
                                 {message.date} {message.time} - {message.sendBy.name}

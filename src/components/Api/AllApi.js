@@ -166,7 +166,7 @@ export const SingleProductProvider = (p_id) => {
 }
 
 
-export const OrderByPatient = (id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup,cart_id) => {
+export const OrderByPatient = (id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup, cart_id) => {
     let token = Cookies.get("user")
     console.log(token, "This Is token for all Api's")
     var myHeaders = new Headers();
@@ -192,7 +192,7 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     formdata.append("order_id", orderId);
     formdata.append("stock_pickup", StockPickup ? "1" : "0");
     formdata.append("products", "50,51");
-    
+
 
 
     var requestOptions = {
@@ -335,10 +335,10 @@ export const ADDAPPOINRTMN = (Day, Type, Note, Amount) => {
     var formdata = new FormData();
     formdata.append("patient_id", ClinicID);
     formdata.append("clinic_id", ValueID);
-    formdata.append("day", 'Sunday');
-    formdata.append("type", '6 Min');
-    formdata.append("notes", "Hii");
-    formdata.append("amount", "10.00");
+    formdata.append("day", Day);
+    formdata.append("type", Type);
+    formdata.append("notes", Note);
+    formdata.append("amount", Amount);
 
     var requestOptions = {
         method: 'POST',

@@ -15,6 +15,10 @@ import { useEffect, useState } from 'react';
 import ProviderDetails from './ProviderDetails';
 import Sidebar from '@layout/Sidebar';
 import Panel from '@layout/Panel';
+import Url from 'url/Allurl';
+
+
+
 
 const SingleProductpage = () => {
 
@@ -117,7 +121,8 @@ const SingleProductpage = () => {
                                         component="img"
                                         alt="green iguana"
                                         height="440"
-                                        image="https://app.reliefehr.com/uploads/products/5_9da5b658ab7d411f7b5896ac8c4a98101110278c.jpg"
+                                        image={`${Url}/public/uploads/images/${singleProduct.img}`}
+                                        // image="https://app.reliefehr.com/uploads/products/5_9da5b658ab7d411f7b5896ac8c4a98101110278c.jpg"
                                     />
 
                                 </Card>

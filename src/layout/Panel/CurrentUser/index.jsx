@@ -41,24 +41,38 @@ const CurrentUser = () => {
         console.log(response);
 
         if (response && response.message === "Successfully logged out") {
-            alert("Successfully Logout!");
+            alert("Successfully Logout  !");
 
-            // Remove the token from local storage
+            // Clear local storage
             localStorage.removeItem("user");
+
+            // Clear cookies
+            document.cookie.split(';').forEach(function (cookie) {
+                var name = cookie.split('=')[0].trim();
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            });
+
+            // Navigate to the desired location
             navigate('/');
         } else {
             alert("Logout failed. Please try again.");
         }
+
     };
 
-
+    const dynamicImagePath = `${Url}/public/uploads/images/${ProfileData?.img}`;
+    const staticImagePath = 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=740&t=st=1697180675~exp=1697181275~hmac=1d5eaf2193838f106950749b72bcc6f78a053ef28c11fb941d226d3b2ad8662b';
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <UserWrapper>
-                <img src={`${Url}/public/uploads/images/${ProfileData.img}`} style={{ height: '25px', width: '25px' }} alt="avatar" />
+                <img
+                    src={ProfileData?.img ? dynamicImagePath : staticImagePath}
+                    style={{ height: '25px', width: '25px' }}
+                    alt="avatar"
+                />
                 <div className="info">
-                    <span className="h3">{ProfileData.name} {ProfileData.lname}</span>
-                    <span className="position">{ProfileData.address}</span>
+                    <span className="h3">{ProfileData?.name} {ProfileData?.lname}</span>
+                    <span className="position">{ProfileData?.address}</span>
                     <Menu className={open ? 'visible' : ''}>
                         <button>
                             <Link to="/settings"> <i className="icon icon-circle-user" /> Change user</Link>

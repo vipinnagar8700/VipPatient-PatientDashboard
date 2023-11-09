@@ -46,7 +46,7 @@ import { Content, ListItemContainer, Main } from '../../components/Todos/Todo/li
 import Checkbox from '@ui/Checkbox';
 import { useEffect } from 'react';
 import { ADDAPPOINRTMN, GETAPPOINTMENTTYPE, GetAppointmentRequest } from '@components/Api/AllApi';
-import { Grid, MenuItem, Select, TextField } from '@mui/material';
+import { Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import styled from 'styled-components/macro';
 // styled components
 
@@ -91,6 +91,19 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
 
 
     const handleAddAppointment = () => {
+        console.log(day, type, note, amount, "9999999999999999999999999999")
+
+        if (day === '' || type === '' || note === '' || amount === '') {
+            enqueueSnackbar("Please fill in all the required fields.", {
+                variant: 'error',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
+            });
+            return; // Exit the function early
+        }
+
         ADDAPPOINRTMN(day, type, note, amount)
             .then(response => {
                 // Handle the response here
@@ -102,12 +115,12 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                         horizontal: 'right',
                     },
                 });
-
+                window.location.reload()
             })
             .catch(error => {
                 // Handle errors here
                 // console.error("Error adding appointment:", error);
-                enqueueSnackbar("Error adding appointment:", error, {
+                enqueueSnackbar("Error booking appointment: " + error, {
                     variant: 'error',
                     anchorOrigin: {
                         vertical: 'top',
@@ -116,6 +129,7 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                 });
             });
     }
+
 
     const [task, setTask] = useState('');
     const [category, setCategory] = useState(null);
@@ -147,7 +161,7 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                 expanded: false
             }));
             setTimeout(() => dispatch(toggleCollapse({ id })), 300);
-            resetForm();
+
         }
     }
     const device = useMobileDetect();
@@ -249,12 +263,16 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                                 <SortableItem key={todo.id} id={todo.id}>
                                     <DnDItem>
                                         <ListItemContainer className="list-item" tabIndex={0}>
-                                            <Content>
-                                                <TextField type='checkbox' sx={{ height: 24, width: 24 }} onChange={e => setDay(e.target.value)} />
-                                                {todo.dotw}
-                                                <Main>
+                                            <Content style={{ justifyContent: "space-between" }}>
+                                                <TextField type='checkbox' sx={{ height: 24, width: 24 }} onChange={e => setDay(e.target.checked)} />
+                                                <Typography ml={3}>
+                                                    {todo.dotw}
+
+
+                                                </Typography>
+                                                {/* <Main  >
                                                     <input type="text" readOnly={true} />
-                                                </Main>
+                                                </Main> */}
 
                                             </Content>
 
@@ -267,8 +285,7 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                 </div>
             </ScrollContainer>
             <Footer >
-
-
+                <InputLabel>Reason for appointment</InputLabel>
                 <Select size='small' fullWidth onChange={e => setType(e.target.value)}>
                     <MenuItem disabled> Choose a reason
                     </MenuItem>
@@ -281,7 +298,8 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                         })
                     }
                 </Select>
-                <TextField sx={{ marginTop: 1 }} fullWidth placeholder="Reason for Appointment"
+                <InputLabel>Notes</InputLabel>
+                <TextField sx={{ marginTop: 1 }} fullWidth placeholder="Notes"
                     // value={Note}
                     size='small'
                     name='note'
@@ -289,6 +307,7 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                     onChange={e => setNote(e.target.value)}
                     className="field"
                 />
+                <InputLabel>Amount</InputLabel>
                 <TextField sx={{ marginTop: 1 }} fullWidth placeholder="Amount"
                     value={amount}
                     size='small'
@@ -297,7 +316,7 @@ const TasksList = ({ isVisible, visibilityHandler, variant }) => {
                     className="field"
                 />
 
-                <button style={{backgroundColor:'green',color:"white",padding:10,marginTop:3}} onClick={handleAddAppointment} type="submit"  >Submit Request</button>
+                <button style={{ backgroundColor: 'green', color: "white", padding: 10, marginTop: 3 }} onClick={handleAddAppointment} type="submit"  >Submit Request</button>
             </Footer>
         </Widget>
     )

@@ -19,6 +19,7 @@ import { nanoid } from 'nanoid';
 import { addMessage } from '@store/features/messenger';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
+import Url from 'url/Allurl';
 
 const InputFooter = styled(Footer)`
 top:92%;
@@ -90,7 +91,7 @@ const Input = ({ elRef, user, getAllChat }) => {
             redirect: 'follow'
         };
 
-        return fetch("https://medical.studiomyraa.com/api/sendMessage", requestOptions)
+        return fetch(`${Url}/api/sendMessage`, requestOptions)
             .then((result) => result.json())
             .then(() => {
                 // Call the onSendMessage function to pass the message text to the parent component
