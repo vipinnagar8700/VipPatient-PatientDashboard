@@ -175,7 +175,7 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     const orderId = Math.floor(Math.random() * 1000000);
     var formdata = new FormData();
     formdata.append("patient_id", ClinicID);
-    formdata.append("cart_id", cart_id);
+    // formdata.append("cart_id", cart_id);
     formdata.append("company_id", ValueID);
     formdata.append("first_name", name);
     formdata.append("last_name", lname);
@@ -191,7 +191,7 @@ export const OrderByPatient = (id, p_id, name, lname, address, address2, city, s
     formdata.append("cod", Cod ? "yes" : "no");
     formdata.append("order_id", orderId);
     formdata.append("stock_pickup", StockPickup ? "1" : "0");
-    formdata.append("products", "50,51");
+    // formdata.append("products", "50,51");
 
 
 
@@ -222,7 +222,7 @@ export const GetAllORderData = () => {
         redirect: 'follow'
     };
 
-    return fetch(`${Url}/api/view_order_in_patient/704`, requestOptions)
+    return fetch(`${Url}/api/view_order_in_patient/${ClinicID}`, requestOptions)
         .then((result) => {
             return result.json()
         })
@@ -237,6 +237,7 @@ export const Addtocart = async (id) => {
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         var formdata = new FormData();
+        formdata.append('company_id',ValueID)
         formdata.append("patient_id", ClinicID);
         formdata.append("product_id", id);
         formdata.append("quantity", "1");

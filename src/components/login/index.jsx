@@ -126,7 +126,7 @@ const Login = () => {
                 </Grid>
                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                   <Typography variant="body2" fontWeight="bold">
-                    <Link href="#" > Forgot password? </Link>
+                    <Link to="/forgot-password" > Forgot password? </Link>
                   </Typography>
                 </Grid>
               </Grid>

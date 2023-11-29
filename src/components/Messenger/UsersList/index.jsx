@@ -54,14 +54,14 @@ const UserList = ({ variant, user, onUserSelect, setModal, activeList, setActive
         const AllUsers = GetAllPatientData()
         if (AllUsers) {
             AllUsers.then((data) => {
-                console.log(data, "ALL USERS DATA FOR MESSAGE998")
+                // console.log(data, "ALL USERS DATA FOR MESSAGE998")
                 setPost(data?.result)
             })
         }
     }, [])
 
 
-    console.log(post, "UUUUUUUUUUUUUUUUUUUUUUUUUuuuu")
+    // console.log(post, "UUUUUUUUUUUUUUUUUUUUUUUUUuuuu")
 
 
 

@@ -56,14 +56,14 @@ const Checkout = () => {
     });
 
 
-const [aD,setABC] = useState([])
+    const [aD, setABC] = useState([])
     useEffect(() => {
 
 
         let AllCheckoutData = CheckoutData();
         if (AllCheckoutData) {
             AllCheckoutData.then((data) => {
-                console.log(data?.result, "All Checkout Data!A")
+                console.log(data, "All Checkout Data!A")
                 setChe(data?.result, "All Checkout Data!")
                 setABC(data?.result?.[0])
             })
@@ -72,7 +72,7 @@ const [aD,setABC] = useState([])
 
     }, [count])
 
-console.log(aD,"8888888888888888888888888888888888888888888")
+    console.log(aD, "8888888888888888888888888888888888888888888")
 
 
     const handleDelete = (id) => {
@@ -81,7 +81,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
         if (DeleteData) {
             DeleteData.then((result) => {
                 // Handle the result if needed (e.g., show a success message)
-                console.log(result);
+                // console.log(result);
                 // alert("Data Successfully Deleted!")
                 enqueueSnackbar("Data Successfully Deleted!", {
                     variant: 'success',
@@ -190,14 +190,14 @@ console.log(aD,"8888888888888888888888888888888888888888888")
     let { p_id } = useParams()
     // alert(p_id)
     const cart_id = aD?.id;
-    console.log(cart_id,"000000000000000000000000000000000000000000000000000")
+    console.log(cart_id, "000000000000000000000000000000000000000000000000000")
 
     const [editProfile, setEditProfile] = useState(false);
 
-    console.log(editProfile, "EditProfileData!");
+    // console.log(editProfile, "EditProfileData!");
 
     let { name, mname, lname, about, email, address, address2, city, dob, gender, id, img, phone, pincode, state } = editProfile;
-    console.log(name, mname, lname, about, email, address, address2, city, dob, gender, id, img, phone, pincode, state, 'EEEEEEEEEEEEEEE')
+    // console.log(name, mname, lname, about, email, address, address2, city, dob, gender, id, img, phone, pincode, state, 'EEEEEEEEEEEEEEE')
 
 
 
@@ -219,7 +219,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
         if (PatientData) {
             PatientData.then((data) => {
                 setEditProfile(data?.results)
-                console.log(data?.results, "lkjhgfd")
+                // console.log(data?.results, "lkjhgfd")
             })
         }
 
@@ -234,7 +234,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
         let DiscountData = getDiscountCoupon()
         if (DiscountData) {
             DiscountData.then((data) => {
-                console.log(data?.result, "Discount Data!")
+                // console.log(data?.result, "Discount Data!")
                 setA(data?.result)
             })
         }
@@ -244,7 +244,7 @@ console.log(aD,"8888888888888888888888888888888888888888888")
         let DeliveryData = getDeliveryData()
         if (DeliveryData) {
             DeliveryData.then((data) => {
-                console.log(data?.result, "DeliveryData Data!")
+                // console.log(data?.result, "DeliveryData Data!")
                 setAB(data)
             })
         }
@@ -284,16 +284,16 @@ console.log(aD,"8888888888888888888888888888888888888888888")
     };
 
 
-    console.log(singleProduct, "SSSSSSSSSSSSSSSSSSSS")
+    // console.log(singleProduct, "SSSSSSSSSSSSSSSSSSSS")
 
     const CompanyID = chec?.map(item => item?.product?.company_id);
-    console.log(CompanyID, "KKKKKKKKKKKKKKKKKKK")
+    // console.log(CompanyID, "KKKKKKKKKKKKKKKKKKK")
     const initialProductIds = chec?.map(item => item?.product_id);
-    console.log(initialProductIds, "KKKKKKKKKKKKKKKKKKK")
+    // console.log(initialProductIds, "KKKKKKKKKKKKKKKKKKK")
     const TotalAmount = chec?.map(item => item?.product?.amount);
-    console.log(TotalAmount, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+    // console.log(TotalAmount, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
     const total = TotalAmount.reduce((acc, currentValue) => acc + parseFloat(currentValue), 0);
-    console.log(total, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
+    // console.log(total, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
 
 
     const totalAmounts = chec?.map(item => {
@@ -304,35 +304,41 @@ console.log(aD,"8888888888888888888888888888888888888888888")
         return quantity * amount;
     });
 
-    console.log(totalAmounts, "Total Amounts for Each Product");
+    // console.log(totalAmounts, "Total Amounts for Each Product");
 
     const totala = totalAmounts.reduce((acc, currentValue) => acc + currentValue, 0);
-    console.log(totala, "Total Amount for All Products");
+    // console.log(totala, "Total Amount for All Products");
 
     const DisAmount = AB?.result?.amount;
 
-    console.log(DisAmount, "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGg")
+    // console.log(DisAmount, "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGg")
 
 
     const CartID = chec?.id
     console.log(CartID, "JJJJJJJJJJJJJJJJJJjj")
     const TotalAoountAferDElivery = totala - DisAmount;
-    console.log(TotalAoountAferDElivery, "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
+    // console.log(TotalAoountAferDElivery, "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
 
     const handleUpdate = (e) => {
         e.preventDefault();
 
         try {
-            const result = OrderByPatient(id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup,cart_id
+            const result = OrderByPatient(id, p_id, name, lname, address, address2, city, state, pincode, total, freeDelivery, rateDelivery, payOnline, Cod, StockPickup, cart_id
             );
 
             result.then((data) => {
-                console.log(data, "thtrtrer;ojgsrdbehx");
-                alert(data?.messege);
+                // console.log(data, "thtrtrer;ojgsrdbehx");
+                enqueueSnackbar(data?.message, {
+                    variant: 'success',
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    },
+                });
                 setCount(count + 1)
 
             })
-            console.log(result, "Data Updated Successfully");
+            // console.log(result, "Data Updated Successfully");
         } catch (error) {
             console.error("Error occurred while updating data:", error);
         }

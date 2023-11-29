@@ -129,12 +129,12 @@ const Payment = () => {
         // <Tab.Container transition={true} activeKey={selectedTab} onSelect={setSelectedTab}>
         //     <Page title="My Order">
         <>
-                    <Card sx={{ minWidth: 1175, '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
+                    <Card sx={{ '@media screen and (max-width: 1200px)': { minWidth: '100%' } }}>
                         <CardContent>
                             <Typography sx={{ fontSize: 16, fontWeight: 400 }} color="text.secondary" gutterBottom>
                                Payment Information
                             </Typography>
-                            <Card sx={{ minWidth: 1145, '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
+                            <Card sx={{ '@media screen and (max-width: 1200px)': { minWidth: '100%' }, backgroundColor: '#F1F5F8' }}>
                                 <CardContent>
                                     <div className="Order Page">
                                         <DataTableExtensions

@@ -19,8 +19,6 @@ const Lobby = ({ username, handleUsernameChange, roomName, handleRoomNameChange,
 
 
 
-
-
   return (
     <form onSubmit={handleSubmit} >
       <Typography sx={{ fontSize: 18, fontWeight: 900, display: 'none' }}>Enter the following Details:-</Typography>

@@ -31,6 +31,7 @@ const Main = ({ user }) => {
     const trackRef = useRef(null);
     console.log(user, "KKKKKKKKKKK1")
     const variant = 'patient'
+    const [count, setCount] = useState(0)
     // Retrieve the data from LocalStorage
     const dataFromLocalStorage = localStorage.getItem("user");
 
@@ -38,7 +39,7 @@ const Main = ({ user }) => {
     const parsedData = JSON.parse(dataFromLocalStorage);
 
 
-    console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
+    // console.log(parsedData, "AL Data AAAAAAAAAAAAAAAAAAAAA");
 
     const ValueID = parsedData?.id;
     const Username = parsedData?.name;
@@ -53,7 +54,11 @@ const Main = ({ user }) => {
     const headerRef = useRef(null);
     const footerRef = useRef(null);
     const height = useContentHeight(headerRef, footerRef);
-
+    const scrollToBottom = () => {
+        if (trackRef.current) {
+            trackRef.current.scrollTop = trackRef.current.scrollHeight;
+        }
+    };
     const [chatMessages, setChatMessages] = useState([]);
     useEffect(() => {
         const delay = 1000; // 15 seconds in milliseconds
@@ -71,6 +76,13 @@ const Main = ({ user }) => {
             clearTimeout(fetchChat);
         };
     }, []);
+    const addMessageAndScroll = (newMessage) => {
+        // Add the new message to the chatMessages state
+        setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+
+        // Scroll to the bottom of the chat container
+        scrollToBottom();
+    };
 
     const getAllChat = () => {
         let token = Cookies.get("user")
@@ -101,7 +113,8 @@ const Main = ({ user }) => {
             .then(result => {
                 if (result.success) {
                     setChatMessages(result.data);
-                    console.log(result?.data, "This is Chat")
+                    // console.log(result?.data, "This is Chat")
+                    setCount(count + 1)
                 } else {
                     console.error("Failed to fetch chat messages");
                 }

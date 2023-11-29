@@ -116,7 +116,7 @@ const AppointmentRequest = ({ nav }) => {
                 }
                 <WidgetBody style={{ paddingBottom: 26 }}>
 
-                    <Card sx={{ minWidth: 732, backgroundColor: '#F1F5F8' }}>
+                    <Card sx={{ minWidth:'100%', backgroundColor: '#F1F5F8' }}>
                         <CardContent>
 
                             <div className="Order Page">
